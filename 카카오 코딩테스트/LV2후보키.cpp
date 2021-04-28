@@ -46,7 +46,7 @@ void cob(vector<vector<string> > relation){
         super_key.insert(key);
     }
 }
-void DFS(int max , int cnt , int index , vector<vector<string>> relation){
+void DFS(int max , int cnt , int index , vector<vector<string> > relation){
     if(max == cnt){
         cob(relation); // 유일성을 만족하는지 체크하고 만족하면 슈퍼키 집합에 추가
     }else{
@@ -95,5 +95,4 @@ int solution(vector<vector<string>> relation) {
     
     // 전체 슈퍼키set.size() - 삭제된 슈퍼키set.size()
     return super_key.size() - del_list.size();
-    //
 }

@@ -36,7 +36,7 @@ void dijkstra(int start){
                 d[graph[now][j].first] = cost;
             }
         }
-    }
+    }//
 }
 int main(){
     cin >> n >> m >> start ;
