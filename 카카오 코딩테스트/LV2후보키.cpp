@@ -10,7 +10,7 @@ set <string> super_key; // 슈퍼키
 set<string> del_list; // 삭제되는 슈퍼키
 vector <string> comb;
 
-void cob(vector<vector<string>> relation){
+void cob(vector<vector<string> > relation){
     vector<int>list; //검사리스트 
     string key ="";
     set <string> s;
@@ -95,4 +95,5 @@ int solution(vector<vector<string>> relation) {
     
     // 전체 슈퍼키set.size() - 삭제된 슈퍼키set.size()
     return super_key.size() - del_list.size();
+    //
 }
