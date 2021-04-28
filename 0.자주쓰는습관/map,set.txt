@@ -1,0 +1,9 @@
+
+1. map과 set의 순환
+    map<int,int> :: iterator itr;
+    for(itr= H_index.begin() ; itr != H_index.end(); itr++){
+        answer = max (answer , itr->second);
+    }
+
+
+

@@ -1,0 +1,1 @@
+int pos = V[i] - 'A'; // char 의 위치 설정 방법

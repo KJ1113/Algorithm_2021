@@ -1,0 +1,5 @@
+C++ 벡터에서 특정원소 지우는 방법
+1. erase(int position) 해당하는 위치의 원소를 지운다. v.erase(v.begin()+4)는 벡터 v의 다섯 번째 원소를 지운다.
+2. erase(int start, int end) 해당하는 범위의 원소를 지운다.
+3. erase(v.begin() + v.size()-1) 마지막요소 삭제
+2019. 4. 20.

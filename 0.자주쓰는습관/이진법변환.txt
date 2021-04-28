@@ -1,0 +1,17 @@
+string tenTotwo(int size){
+    int num = size;
+    int mod;
+    string ans ="";
+    while(true){
+        if(num == 1){
+            ans += '1';
+            break;
+        }
+        mod = num%2;
+        num = num/2;
+        ans += to_string(mod);
+        
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}

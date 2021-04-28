@@ -1,0 +1,9 @@
+1. 문자열 뒤집기 함수
+    #include <algorithm>
+    reverse(str.begin(), str.end()); //리버스
+    s.substr(); 
+    s.substr(1,5); 인덱스 1 <= index < 5 반환
+
+2. 문자열 마지막 문자 삭제
+    int last_id = str.size()-1;
+    str.erase(str.begin()+last_idx ,str.end());

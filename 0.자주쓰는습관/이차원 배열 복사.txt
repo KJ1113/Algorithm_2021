@@ -1,0 +1,2 @@
+#include <cstring>
+memcpy(fish_map, tmp_fish_map, sizeof(tmp_fish_map));
