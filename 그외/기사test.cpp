@@ -13,5 +13,10 @@ int main(){
     p = a;
 
     cout << p->name <<endl;
+
+    char B = '1';
+    cout << B << endl;
+    cout << B - '0' <<endl;
+    
     
 }
