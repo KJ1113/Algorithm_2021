@@ -18,5 +18,4 @@ int main(){
     cout << B << endl;
     cout << B - '0' <<endl;
     
-    
 }
