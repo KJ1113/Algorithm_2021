@@ -1,3 +1,7 @@
 git add . //변경사항 추가
 git commit -m "변경된 내용" //변경사항 커밋
 git push - u origin main // 변경사항 push
+
+
+git remote -v // 연결확인
+git remote add  origin https://github.com/KJ1113/Algorithm_2021.git
