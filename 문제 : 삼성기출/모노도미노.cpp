@@ -114,8 +114,6 @@ void red_init(vector< pair<int,int> > &mlist){
     }
 }
 void del_map(){
-    
-
     // 아래
     for(int i = 6 ; i < 10 ;i++){
         int cnt = 0 ;
@@ -156,7 +154,6 @@ void del_map(){
 }
 void checkPlace(){
     // 옆
-    
     while (true){
         bool flag = true;
         for(int i = 0 ; i < 4 ;i++){
@@ -179,9 +176,7 @@ void checkPlace(){
         }
     }
 
-    
     // 아래 
-    
     while (true){
         bool flag = true;
         for(int i = 4 ; i < 6 ;i++){
@@ -217,30 +212,19 @@ int main(){
     cin >> N;
     for(int i = 0 ; i < N ; i ++){
         cin >> inputT >> inputY >> inputX;
-        //cout << i+1 <<endl;
         vector< pair<int,int> > mlist;
         mlist.push_back({inputY,inputX});
-
-        if(inputT == 1){
-
-        }else if(inputT == 2){
+        if(inputT == 2){
             mlist.push_back({inputY,inputX+1});
-        }else{
+        }else if(inputT == 3){
             mlist.push_back({inputY+1,inputX});
         }
         move(mlist); 
         del_map();
         checkPlace();
-        /*
-        for(int idx = 0 ; idx < mlist.size(); idx++){
-            map[mlist[idx].first][mlist[idx].second] = 1;
-        }
-        show();
-        red_init(mlist);*/
     }
     checkMap();
     cout << point << endl;
-    cout << Tcnt <<endl;
-
+    cout << Tcnt << endl;
     return 0 ;
 }
