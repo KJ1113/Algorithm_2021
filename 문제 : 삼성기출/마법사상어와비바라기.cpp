@@ -5,7 +5,6 @@ int map[51][51];
 int N , M;
 int d , s , ans = 0;
 int dir[8][2] = { {0,-1}, {-1,-1}, {-1,0}, {-1,1}, {0,1}, {1,1}, {1,0}, {1,-1} };
-
 vector<pair<int,int> > Clist; //구름 위치  
 bool Cvist[51][51];
 void move (){
@@ -29,28 +28,11 @@ void move (){
     }
     Clist.clear();
     Clist = tmp_Clist;
-    
-}
-void cshow(){
-    for(int i = 0 ; i < N; i ++){
-        for(int j = 0 ; j < N ;j++){
-            if(Cvist[i][j]){
-                cout << "1 ";
-            }else{
-                cout << "0 ";
-            }
-        }
-        cout <<endl;
-    }
-    cout << endl;
 }
 void check(){
-    //cout << Clist.size() <<endl;
     vector<int> wCnt_list;
-
     for(int idx = 0 ; idx <  Clist.size() ;idx ++){
         map[Clist[idx].first][Clist[idx].second] ++;
-        //cout << "Y "<<Clist[idx].first <<", X "<< Clist[idx].second <<endl;
     }
 
     for(int idx = 0 ; idx <  Clist.size() ;idx ++){
@@ -64,12 +46,10 @@ void check(){
         }
         wCnt_list.push_back(wCnt);
         Cvist[Clist[idx].first][Clist[idx].second] =true;
-        //cout << "Y "<<Clist[idx].first <<", X "<< Clist[idx].second <<endl;
     }
 
     for(int idx = 0 ; idx <  Clist.size() ;idx ++){
         map[Clist[idx].first][Clist[idx].second] +=wCnt_list[idx];
-        //cout << "Y "<<Clist[idx].first <<", X "<< Clist[idx].second <<endl;
     }
 }
 
@@ -77,9 +57,7 @@ int make_ans(){
     for(int i = 0 ; i < N; i ++){
         for(int j = 0 ; j < N ;j++){
             ans += map[i][j];
-            //cout << map[i][j] <<" ";
         }
-        //cout <<endl;
     }
     return ans;
 }
@@ -101,9 +79,7 @@ void makeCloud(){
     Clist.clear();
     Clist = tmp_Clist;
 }
-
 int main(){
-
     cin >> N >> M;
     for(int i = 0 ; i < N ;i++){
         for(int j = 0 ; j <N ;j++){
@@ -114,7 +90,6 @@ int main(){
     Clist.push_back({ N-1 ,1});
     Clist.push_back({ N-2 ,0});
     Clist.push_back({ N-2 ,1});
-
     for(int tc = 0 ; tc < M ; tc++){
         cin >> d >> s;
         move();
@@ -122,5 +97,4 @@ int main(){
         makeCloud();
     }
     cout << make_ans() <<endl;
-
 }
