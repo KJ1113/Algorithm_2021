@@ -6,6 +6,8 @@ int belt [101][2]; // 벨트 내구도
 bool Rvist[101][2];
 vector<pair <int,int> > robot; 
 void belt_Move(){
+
+    // 벨트이동
     int tmp_belt[101][2];
     for(int i = 1 ; i < N ; i++){
         tmp_belt[i][0] = belt[i-1][0];
@@ -20,6 +22,7 @@ void belt_Move(){
         belt[i][1] = tmp_belt[i][1];
     }
 
+    // 로봇도 이동
     vector<pair <int,int> > tmp_robot; 
     for(int i = 0 ; i < N ; i++){
         Rvist[i][0] = false;
@@ -43,14 +46,15 @@ void belt_Move(){
         }
         robot[idx].first = nextY;
         robot[idx].second = nextX;
-        if( ! (nextX == N-1 && nextY == 0) ){
+        if( ! (nextX == N-1 && nextY == 0) ){ // N 위치 로봇은 없어짐
             tmp_robot.push_back({nextY,nextX});
-            Rvist[nextX][nextY] = true;
+            Rvist[nextX][nextY] = true; // 현재 로봇위치저장
         }
     }
     robot = tmp_robot;
 }
-void robot_Move(){
+
+void robot_Move(){ // 로봇만 이동
     vector<pair <int,int> > tmp_robot; 
     for(int idx = 0 ; idx < robot.size() ;idx++){
         int curY = robot[idx].first;
@@ -69,6 +73,7 @@ void robot_Move(){
                 curY = 0;
             }
         }
+        
         if(belt[curX][curY] > 0 && Rvist[curX][curY] == false){// 움직일수있는 경우
             belt[curX][curY] --;
             Rvist[curX][curY] = true;
@@ -82,7 +87,6 @@ void robot_Move(){
             tmp_robot.push_back({robot[idx].first,robot[idx].second});
         }
     }
-    robot.clear();
     robot = tmp_robot;
 
     if(belt[0][0] > 0 && Rvist[0][0] == false){
