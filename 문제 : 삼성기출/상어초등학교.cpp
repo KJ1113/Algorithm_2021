@@ -22,7 +22,6 @@ void check_Friend(int child_idx){
                 continue;
             }
 
-
             for(int k = 0 ; k < 4 ;k++){
                 int nextY = curY + dir[k][0];
                 int nextX = curX + dir[k][1];
@@ -65,7 +64,7 @@ void get_pos(int num){
     for(int i = 0 ; i < N ;i++){
         for(int j = 0 ; j < N ; j++ ){
             if(max_f == fc_map[i][j] && vist[i][j] == true){
-                empty_list.push_back( {empty_map[i][j], {i,j}});
+                empty_list.push_back( { empty_map[i][j], {i,j}});
             }
         }
     }
