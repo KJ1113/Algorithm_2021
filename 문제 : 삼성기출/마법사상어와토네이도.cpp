@@ -90,7 +90,7 @@ void show(){
     cout <<endl;
 }
 
-int move(){
+void move(){
     for(int num = 0 ; num < number.size() ; num++){
         int curY = number[num].second.first;
         int curX = number[num].second.second;
@@ -117,9 +117,6 @@ int move(){
             map[nY][nX] += alpa;
         }
         map[curY][curX] = 0;
-        if(ans == 71){
-            cout << curDir <<endl;
-        }
     }
 }
 int main(){

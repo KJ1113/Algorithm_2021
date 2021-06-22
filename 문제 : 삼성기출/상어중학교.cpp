@@ -3,84 +3,168 @@
 #include <queue>
 #include <algorithm>
 using namespace std;
-int N , M ;
+int N , M ,ans = 0;
 int map[21][21];
 int dir[4][2] = { {1,0}, {0,1}, {-1,0}, {0,-1}};
 bool vist[21][21];
-vector< vector<pair<int,int> > > g_list;
-bool cmp(vector<pair<int,int> > A  , vector<pair<int,int> > B){
-    if( A.size() == B.size()){
-        return A[0].first > B[0].first;
-        if(A[0].first == B[0].first){
-            return A[0].second > B[0].second;
+void zero_init(){
+    for(int i = 0 ; i < N ;i ++){
+        for(int j = 0 ; j< N  ;j++){
+            if(map[i][j] == 0 )vist[i][j] = false;
         }
     }
-    return A.size() > B.size();
 }
-void init(){
+void map_init(){
     for(int i = 0 ; i < N ; i++){
         for(int j = 0; j < N ;j++){
             vist[i][j] = false;
         }
     }
 }
-void findGroup(int Y , int X){
+struct Node{
+    vector<pair<int,int> > v; 
+    int rcnt = 0;
+};
+Node findGroup(int Y , int X ,  int curC ){
+    int rcnt = 0 ;
     queue< pair<int,int> > q;
-    vector< pair<int,int> > g;
-    int curC = map[Y][X];
+    vector <pair<int,int> > v;
     q.push({Y,X});
-    g.push_back({Y,X});
+    v.push_back({Y,X});
     vist[Y][X] = true;
-    
-    while (q.empty()){
+
+    while (!q.empty()){
         int curY = q.front().first;
         int curX = q.front().second;
         q.pop();
-
-        for(int k = 0 ; k < 4 ;k++){
-            int nextY = curY + dir[k][0];
-            int nextX = curX + dir[k][1];
-            if(nextY < 0 || nextY >= N || nextX < 0 || nextX >= N || vist[nextY][nextX]) continue;
-            if(map[nextY][nextX] == curC || map[nextY][nextX] == 0){
-                g.push_back({nextY, nextX});
-                q.push({nextY, nextX});
-                vist[nextY][nextX] = true;
+        for(int k = 0 ; k < 4; k++){
+            int nY = curY + dir[k][0];
+            int nX = curX + dir[k][1];
+            if(nY < 0 || nY >= N || nX < 0 || nX >= N ) continue;
+            if( map[nY][nX] == -2 || map[nY][nX] == -1 || vist[nY][nX] ) continue;
+            if(map[nY][nX] == 0 || map[nY][nX] == curC){
+                vist[nY][nX] = true;
+                if(map[nY][nX] == 0 ) rcnt++;
+                v.push_back({ nY , nX });
+                q.push({nY,nX});
             }
         }
     }
 
-    for(int i = 0 ; i < N ; i++){
-        for(int j = 0; j < N ;j++){
-            if(map[i][j] == 0 ) vist[i][j] = false;
+    Node n;
+    n.v = v;
+    n.rcnt = rcnt;
+    return n;
+}
+void gravity(){
+    for (int i = N - 2; i >= 0; i--){
+        for (int j = 0; j < N; j++){
+            if (map[i][j] <= -1){
+                continue;
+            }
+            int y = i;
+            while (true){
+                if (y == N){
+                    break;
+                }
+                int cur = map[y][j];
+                int next = map[y + 1][j];
+                if (next != -2){
+                    break;
+                }
+                map[y + 1][j] = cur;
+                map[y][j] = -2;
+                y++;
+            }
         }
     }
-
-    if(g.size() >= 2){
-        g_list.push_back(g);
+}
+void mat_turn(){
+    int tempBoard[22][22];
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < N; j++){
+            tempBoard[i][j] = map[i][j];
+        }
+    }
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < N; j++){
+            map[N - (j + 1)][i] = tempBoard[i][j];
+        }
+    }
+}
+void del(vector<pair<int,int> > &tv){
+    for(int idx = 0 ; idx < tv.size() ;idx++){
+        int cy = tv[idx].first;
+        int cx = tv[idx].second;
+        map[cy][cx] = -2;
     }
 }
 int main(){
     cin >> N >> M;
-    for(int i  =0 ; i < N ;i++){
+    for(int i  = 0 ; i < N ;i++){
         for(int j =0; j < N ;j++){
             cin >> map[i][j];
         }
     }
+    
+    while (true){
+        map_init();
+        int cY = -10;
+        int cX = -10;
+        int csize = -10;
+        int crcnt = -10;
+        vector<pair<int,int> > dv;
+        for(int i = 0 ; i < N ;i ++){
+            for(int j = 0 ; j< N  ;j++){
+                zero_init(); // 0 초기화
+                if( map[i][j] == 0|| map[i][j] == -2 || map[i][j] == -1 || vist[i][j] ) continue;
+                Node tv = findGroup(i,j,map[i][j]);
+                vist[i][j] = true;
+                int tmpsize = tv.v.size();
+                int tmprcnt = tv.rcnt ;
 
-    while(true){
-        init();
-        g_list.clear();
-        for(int i = 0 ; i < N ; i++){
-            for(int j = 0; j < N ;j++){
-                if(vist[i][j] == false && map[i][j] != -1 && map[i][j] != 0) {
-                    findGroup(i,j);
+                if(tmpsize >= 2 ){
+                    if(csize < tmpsize ){
+                        cY = tv.v[0].first;
+                        cX = tv.v[0].second;
+                        csize = tmpsize;
+                        crcnt = tmprcnt;
+                        dv = tv.v;
+                    }else if(csize == tmpsize){
+                        if(crcnt < tmprcnt ){
+                            cY = tv.v[0].first;
+                            cX = tv.v[0].second;
+                            csize = tmpsize;
+                            crcnt = tmprcnt;
+                            dv = tv.v;
+                        }else if(crcnt == tmprcnt){
+                            if(cY < tv.v[0].first ){
+                                cY = tv.v[0].first;
+                                cX = tv.v[0].second;
+                                csize = tmpsize;
+                                crcnt = tmprcnt;
+                                dv = tv.v;
+                            }else if(cY == tv.v[0].first ){
+                                if(cY == tv.v[0].first && cX < tv.v[0].second ){
+                                    cY = tv.v[0].first;
+                                    cX = tv.v[0].second;
+                                    csize = tmpsize;
+                                    crcnt = tmprcnt;
+                                    dv = tv.v;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-        sort(g_list.begin(), g_list.end() , cmp);
-        cout << g_list[0].size() <<endl;
-        break;
+        if(csize == -10) break;
+        ans += (csize * csize);
+        del(dv);
+        gravity();
+        mat_turn();
+        gravity();
     }
-
+    cout << ans ;
     return 0;
 }
