@@ -22,7 +22,7 @@ void map_init(){
     }
 }
 struct Node{
-    vector<pair<int,int> > v; 
+    vector<pair<int,int> > v;
     int rcnt = 0;
 };
 Node findGroup(int Y , int X ,  int curC ){
