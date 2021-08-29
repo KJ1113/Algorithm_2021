@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 int N ;
 void show_ans(int a , int b){
@@ -10,7 +9,9 @@ void show_ans(int a , int b){
     }
 }
 int main(){
-
+    ios_base :: sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     cin >> N ;
     for(int n = 0 ; n < N ; n++){
         int a_list[5] = {0,}, b_list[5] ={0,}; // 별, 동그라미, 네모, 세모를 각각 숫자 4, 3, 2, 1로 표현한다. 
