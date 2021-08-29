@@ -6,7 +6,6 @@ int N , ans = -1 ;
 int up_down[6] = { 5, 3, 4, 1, 2, 0 };
 struct cube{
     int num[6];
-    
     int cur_down , cur_up;
 };
 vector <cube> cube_list;
