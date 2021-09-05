@@ -5,5 +5,9 @@
         answer = max (answer , itr->second);
     }
 
+2. map find 
+if (m.find("Alice") != m.end()) { cout << "find" << endl; } 
+else { cout << "not find" << endl; }
+
 
 

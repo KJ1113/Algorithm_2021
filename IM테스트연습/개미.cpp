@@ -20,8 +20,5 @@ int main(){
         q = 2*h - q;
     }
     cout << p << " " << q <<endl;
-    
-    
-
     return 0 ;
 }
