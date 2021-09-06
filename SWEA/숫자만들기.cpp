@@ -1,4 +1,3 @@
-///////////////////////////////////////////////////
 #include<iostream>
 #include <vector>
 #include <algorithm>
@@ -44,9 +43,7 @@ int main(int argc, char** argv){
 
         do{
             int res = num[0];
-            
             for(int i = 1 ; i <= op.size() ;i++){
-                
                 if(op[i-1] == '+')
                     res +=  num[i];
                 if(op[i-1] == '-')
