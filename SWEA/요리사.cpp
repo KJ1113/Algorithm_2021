@@ -58,9 +58,7 @@ int main(int argc, char** argv){
         }
 
         DFS(0,0);
-
         cout << "#"<< test_case<<" "<<ans << endl;
-
 	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
