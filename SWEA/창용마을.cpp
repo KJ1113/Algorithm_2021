@@ -14,7 +14,6 @@ void DFS(int num ){
         if(vist[next] == false){
             DFS(next);
         }
-
     }
 }
 int main(int argc, char** argv){
@@ -24,6 +23,7 @@ int main(int argc, char** argv){
 	cin>>T;
 	for(test_case = 1; test_case <= T; ++test_case){
         int ans = 0;
+
         cin >> N >> M;
         for(int num = 1; num <= N ;num++){
             my_Ne_list[num].clear();
