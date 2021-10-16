@@ -22,7 +22,8 @@ void DFS(int sY , int sX , int sdir , tmp_map_set tm){
     for(int index = 0 ; index < tm.fish_list.size() ; index++){
         
         int num = tm.fish_list[index].first;
-        int d = tm.fish_list[index].second;
+        int k = tm.fish_list[index].second; // k 는 방향을 결정하는 상수
+        int first_dir = k;
         int cY , cX;
 
         for(int i = 0 ; i < 4 ; i++){
@@ -33,21 +34,19 @@ void DFS(int sY , int sX , int sdir , tmp_map_set tm){
                 } 
             }
         }
-
-        int first_dir =d;
         while (true){
-            int nY = cY + dir[d][0];
-            int nX = cX + dir[d][1];
-            //cout << nY << " "<<nX <<endl;
+            int nY = cY + dir[k][0];
+            int nX = cX + dir[k][1];
+            
             if(nY < 0 || nX < 0 || nY >= 4 || nX >= 4|| (nY == sY && nX == sX)) {
-                d++;
-                if(d == 9) d = 1;
-                if(first_dir == d) break;
+                k++;
+                if(k == 9) k = 1;
+                if(first_dir == k) break;
             }else{
                 int tmp = tm.map[nY][nX];
                 tm.map[nY][nX] = num;
                 tm.map[cY][cX] = tmp;
-                tm.fish_list[index].second = d;
+                tm.fish_list[index].second = k;
                 break;
             }
         }
@@ -58,11 +57,11 @@ void DFS(int sY , int sX , int sdir , tmp_map_set tm){
     while (true){
         int nY = c_sY + dir[sdir][0];
         int nX = c_sX + dir[sdir][1];
-        if(nY < 0 || nX < 0 || nY >= 4 || nX >= 4) break;
+        if(nY < 0 || nX < 0 || nY >= 4 || nX >= 4) break; // 상어가 범위를 벗어나면 
 
-        if(tm.map[nY][nX] !=0) {
+        if(tm.map[nY][nX] !=0) { // 상어가 갈수있는 경우
             int next_dir =0;
-            tmp_map_set tms = tm;
+            tmp_map_set tms = tm; // tm 복사
             tms.sum += tm.map[nY][nX];
 
             // fish_list 초기화
