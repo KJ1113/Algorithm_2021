@@ -31,7 +31,6 @@ void DFS(int wall_cnt){
             int cY = q.front().first;
             int cX = q.front().second;
             q.pop();
-
             for(int k = 0 ; k < 4 ;k++){
                 int nY = cY + dir[k][0];
                 int nX = cX + dir[k][1];
@@ -75,6 +74,5 @@ int main(){
     }
     DFS(0);
     cout << ans ;
-
     return 0;
 }
