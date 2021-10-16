@@ -5,8 +5,8 @@
 using namespace std;
 int ans = 0;
 int N , M;
-int map[501][501];
-bool vist[501][501];
+int map[502][502];
+bool vist[502][502];
 int dir[4][2] = {{1,0}, {-1,0}, {0,1}, {0,-1}};
 
 
@@ -50,10 +50,12 @@ int main(){
             for(int k = 0 ; k < 4;k++){
                 int ny = i + dir[k][0];
                 int nx = j + dir[k][1];
-                if(ny < 0 || nx < 0 || ny >= N || nx >= M ) continue;
-                int res = alpa - map[ny][nx];
-
-                ans = max (ans , res);
+                if(ny < 0 || nx < 0 || ny >= N || nx >= M ) {
+                    ans = max (ans , alpa);
+                }else{
+                    int res = alpa - map[ny][nx];
+                    ans = max (ans , res);
+                }
             }
 
         }
