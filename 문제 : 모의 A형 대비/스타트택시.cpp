@@ -87,7 +87,7 @@ int main(){
         int del_index = -1;
         for(int index = 0 ; index < people_list.size(); index++){
             int y = people_list[index].first.first;
-            int x = people_list[index].first.second;
+            int x = people_list[index].first.second; 
             if( min_length >= tmp_map[y][x]){
                 if(min_length == tmp_map[y][x]){
                     if(y < sY ){
