@@ -117,6 +117,8 @@ void move(){
             map[nY][nX] += alpa;
         }
         map[curY][curX] = 0;
+
+        show();
     }
 }
 int main(){

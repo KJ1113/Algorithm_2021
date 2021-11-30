@@ -105,6 +105,7 @@ int main(){
             cin >> map[i][j];
         }
     }
+    
     for(int i = 0 ; i < K ;i++){
         // 1 이동
         moveDice(curDir);
